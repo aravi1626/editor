@@ -1,3 +1,7 @@
+/* Import base modules to output tailwind safe list class selectors*/
+@tailwind components;
+@tailwind utilities;
+
 html, body {
     margin: 0;
     padding: 0;

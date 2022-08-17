@@ -1,9 +1,9 @@
 import { ReactNode, useEffect, useState } from 'react'
 
-import { Editor } from '.'
+import { Editor, EditorData } from '.'
 
 interface EditorContentRenderProps {
-	data: { components: object[] | any | string; styles: string }
+	data?: EditorData
 	loadingFallback?: ReactNode
 }
 

@@ -21,7 +21,7 @@ export function Editor(props: EditorProps) {
 
 function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, ...props }: EditorProps) {
 	const editorContainerRef = useRef<HTMLDivElement | null>(null)
-	const oldDataRef = useRef(data)
+	const oldDataRef = useRef<EditorData>()
 
 	const [editorInstance, setEditorInstance] = useState<any>()
 	const [isMounted, setIsMounted] = useState(false)

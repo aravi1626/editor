@@ -126,6 +126,19 @@ export default function EditorStyle() {
     .gjs-cv-canvas {
         background-color: #fafafa !important;
     }
+    .gjs-block__media {
+    	text-align: left;
+    }
+    
+    i.gjs-layer-vis * {
+    	width: inherit;
+    }
+    i.gjs-layer-caret svg {
+    	width: inherit;
+    }
+    div.gjs-layer-move {
+    	width: 27px;
+    }
 		`,
 			}}
 		/>

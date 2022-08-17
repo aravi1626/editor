@@ -1,9 +1,11 @@
+import packageJSON from '../../../package.json'
+
 export function buildStatePanel(editor: any) {
 	const panelName = 'state'
 	const options = [
 		{
 			id: 'version',
-			label: `<div>V1.0.0</div>`,
+			label: `<div>V${packageJSON.version}</div>`,
 			active: false,
 		},
 		{

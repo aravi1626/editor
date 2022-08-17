@@ -1,6 +1,6 @@
 {
   "name": "editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Editor html content.",
   "main": "src/Editor/index.ts",
   "repository": "git@github.com:Exclusible/editor.git",
@@ -8,16 +8,15 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:tailwind-css-editor": "npx tailwindcss -i ./src/commons/components/UI/Editor/styles.module.css -o ./src/commons/components/UI/Editor/styles/output.module.css --minify --inline",
-    "preview": "vite preview"
+    "build:tailwind-css-editor": "npx tailwindcss -i ./src/Editor/styles.module.css -o ./src/Editor/styles/output.module.css --minify --inline"
   },
   "dependencies": {
     "grapesjs": "^0.19.5",
     "juice": "^8.1.0",
     "lodash": "^4.17.21",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "styled-jsx": "^5.0.4"
   },
   "devDependencies": {
     "@types/node": "17.0.34",

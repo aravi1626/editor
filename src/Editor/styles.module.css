@@ -1,0 +1,3 @@
+/* Import base modules to output tailwind safe list class selectors*/
+@tailwind components;
+@tailwind utilities;

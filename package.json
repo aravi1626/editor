@@ -1,0 +1,39 @@
+{
+  "name": "editor",
+  "version": "1.0.0",
+  "description": "Editor html content.",
+  "main": "src/Editor/index.ts",
+  "repository": "git@github.com:Exclusible/editor.git",
+  "author": "iagor moraes <iagor2014@outlook.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:tailwind-css-editor": "npx tailwindcss -i ./src/commons/components/UI/Editor/styles.module.css -o ./src/commons/components/UI/Editor/styles/output.module.css --minify --inline",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "grapesjs": "^0.19.5",
+    "juice": "^8.1.0",
+    "lodash": "^4.17.21",
+    "react": "18.1.0",
+    "react-dom": "18.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.34",
+    "@types/react": "18.0.9",
+    "@types/react-dom": "18.0.4",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@vitejs/plugin-react": "^2.0.1",
+    "autoprefixer": "^10.4.7",
+    "eslint": "8.15.0",
+    "eslint-config-next": "12.2.2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "postcss": "^8.4.14",
+    "prettier": "^2.6.2",
+    "tailwindcss": "^3.1.6",
+    "typescript": "4.6.4",
+    "vite": "^3.0.8"
+  }
+}

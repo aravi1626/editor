@@ -9,7 +9,7 @@ const stream = require('stream')
 class OutputStream extends stream.Transform {
 	constructor(props) {
 		super(props)
-		this.write('export const styles = `')
+		this.push('export const styles = `')
 	}
 	_transform(chunk, encoding, callback) {
 		this.push(chunk.toString().replace(/\\/gm, '\\\\'))

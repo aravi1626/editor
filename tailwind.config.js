@@ -5,7 +5,7 @@ const sizes = Array(100)
 	.fill(undefined)
 	.map((_, index) => index + 1)
 const commonSizes = sizes.reduce((acc, px) => ({ ...acc, [`${prefix}${px}`]: convertPxToRem(px) }), {})
-const safelistVariants = ['tablet']
+const safelistVariants = ['tablet', 'desktop']
 
 module.exports = {
 	mode: 'jit',

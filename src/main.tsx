@@ -14,10 +14,10 @@ const App: React.FC = () => {
 			<button className={buttonClassName} onClick={() => setPreview(true)}>
 				press to preview
 			</button>
-			<Editor className="flex-1" onSave={setData} onChangeValue={setData} />
+			<Editor className="flex-1" data={data} onSave={setData} onChangeValue={setData} />
 			{preview && (
 				<div
-					className="absolute inset-0 w-full h-full z-10 bg-white/80"
+					className="fixed inset-0 w-full h-full z-10 bg-white/80 overflow-auto"
 					style={{
 						backdropFilter: 'blur(4px)',
 					}}>

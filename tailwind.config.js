@@ -15,7 +15,7 @@ module.exports = {
 		{ pattern: /w-full/, variants: safelistVariants },
 		{ pattern: /w-\d{1,2}\/12/, variants: safelistVariants },
 		// width/height
-		{ pattern: /max?([wh])-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/, variants: safelistVariants },
+		{ pattern: /max-?([wh])-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/, variants: safelistVariants },
 		// flex
 		'flex',
 		{ pattern: /flex-(col|row)/, variants: safelistVariants },

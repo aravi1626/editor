@@ -15,7 +15,7 @@ module.exports = {
 		{ pattern: /w-full/, variants: safelistVariants },
 		{ pattern: /w-\d{1,2}\/12/, variants: safelistVariants },
 		// width/height
-		{ pattern: /([wh])-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/, variants: safelistVariants },
+		{ pattern: /max?([wh])-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/, variants: safelistVariants },
 		// flex
 		'flex',
 		{ pattern: /flex-(col|row)/, variants: safelistVariants },
@@ -26,12 +26,12 @@ module.exports = {
 		'grid',
 		{ pattern: /grid-cols-([123])/, variants: safelistVariants },
 		// gaps
-		{ pattern: /(gap|gap-y|gap-x)-px-(2|4|8|16|20|32|40|64)/, variants: safelistVariants },
+		{ pattern: /(gap|gap-y|gap-x)-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/, variants: safelistVariants },
 		// paddings
-		{ pattern: /^(p|pt|pb|pl|pr|px|py)-px-(2|4|8|16|32|64|100)/, variants: safelistVariants },
+		{ pattern: /^(p|pt|pb|pl|pr|px|py)-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/, variants: safelistVariants },
 		// margins
 		{ pattern: /^(mx|my)-auto/, variants: safelistVariants },
-		{ pattern: /^(m|mt|mb|ml|mr|mx|my)-px-(2|4|8|16|32|64|100)/, variants: safelistVariants },
+		{ pattern: /^(m|mt|mb|ml|mr|mx|my)-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/, variants: safelistVariants },
 		// text-colors
 		{ pattern: /text-(primary|secondary)/ },
 		// text-sizes

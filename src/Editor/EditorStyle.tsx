@@ -63,6 +63,9 @@ export default function EditorStyle() {
         color: #242424 !important;
         background-color: #f1f1f1 !important;
     }
+    .gjs-field .gjs-d-s-arrow {
+    	border-top-color: #242424 !important;
+    }
 
     .gjs-block {
         padding: 0 !important;
@@ -128,6 +131,7 @@ export default function EditorStyle() {
     }
     .gjs-block__media {
     	text-align: left;
+    	padding: 4px;
     }
     
     i.gjs-layer-vis * {

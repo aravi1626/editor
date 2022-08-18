@@ -1,5 +1,6 @@
 import { HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
 import isEqual from 'lodash/isEqual'
+import GrapeJSType from 'grapesjs'
 
 import EditorStyle, { canvasCss } from './EditorStyle'
 import { loadPanels } from './panels'
@@ -34,7 +35,7 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 		const GrapeJS: any = await import('grapesjs')
 
 		setEditorInstance(
-			GrapeJS.init({
+			GrapeJSType.init({
 				container: editorContainerRef.current ?? undefined,
 				width: '100%',
 				height: '100%',
@@ -50,6 +51,28 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 					componentFirst: true,
 				},
 				storageManager: false,
+				deviceManager: {
+					devices: [
+						{
+							id: 'mobilePortrait',
+							name: 'Mobile portrait',
+							width: '320px',
+							widthMedia: '767px',
+						},
+						{
+							id: 'tablet',
+							name: 'Tablet',
+							width: '900px',
+							widthMedia: '768px',
+						},
+						{
+							id: 'desktop',
+							name: 'Desktop',
+							width: '100%',
+							widthMedia: '1280px',
+						},
+					],
+				},
 				canvasCss: canvasCss,
 				forceClass: false,
 				baseCss: styles,

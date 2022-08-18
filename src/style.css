@@ -1,4 +1,5 @@
 /* Import base modules to output tailwind safe list class selectors*/
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 

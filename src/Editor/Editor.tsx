@@ -46,6 +46,8 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 					// @ts-ignore
 					escapeName: (name: string): string => name.trim().replace(/w-\d{1,2}(-)\d{1,2}/gi, '/'),
+					// This option will avoid to inject into classes selectors the inline styles ones.
+					componentFirst: true,
 				},
 				storageManager: false,
 				canvasCss: canvasCss,

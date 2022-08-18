@@ -7,23 +7,23 @@ import { Editor, EditorContentRender, EditorData } from './Editor'
 const App: React.FC = () => {
 	const [data, setData] = useState<EditorData | undefined>()
 	const [preview, setPreview] = useState(false)
+	const buttonClassName = 'bg-primary text-white border-none text-px-18 cursor-pointer px-px-12'
 
 	return (
-		<main>
-			<button onClick={() => setPreview(true)}>preview</button>
-			<Editor style={{ width: '100%', height: '100vh' }} onSave={setData} onChangeValue={setData} />
+		<main className="flex flex-col h-screen">
+			<button className={buttonClassName} onClick={() => setPreview(true)}>
+				press to preview
+			</button>
+			<Editor className="flex-1" onSave={setData} onChangeValue={setData} />
 			{preview && (
 				<div
+					className="absolute inset-0 w-full h-full z-10 bg-white/80"
 					style={{
-						position: 'absolute',
-						inset: 0,
-						width: '100%',
-						height: '100%',
 						backdropFilter: 'blur(4px)',
-						zIndex: 10,
-						backgroundColor: 'rgba(255,255,255,0.8)',
 					}}>
-					<button onClick={() => setPreview(false)}>close</button>
+					<button className={buttonClassName + ' sticky top-0'} onClick={() => setPreview(false)}>
+						press to close preview
+					</button>
 					<EditorContentRender data={data} />
 				</div>
 			)}

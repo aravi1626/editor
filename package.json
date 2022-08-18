@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build:tailwind-css-editor": "npx tailwindcss -i ./src/Editor/styles.module.css -o ./src/Editor/styles/output.module.css --minify --inline"
+    "build:tailwind-css-editor": "node scripts/build-css.js"
   },
   "dependencies": {
     "grapesjs": "^0.19.5",

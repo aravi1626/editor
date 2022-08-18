@@ -52,6 +52,8 @@ module.exports = {
 		// position
 		'inset-0',
 		{ pattern: /(top|bottom|left|right)-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/ },
+		// aspect ratio
+		{ pattern: /aspect-(square|video)/, variants: safelistVariants },
 	],
 	theme: {
 		container: {

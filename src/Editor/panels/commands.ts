@@ -1,7 +1,7 @@
 export function buildCommandsPanel(editor: any) {
 	editor.Commands.add('set-device-desktop', (e) => e.setDevice('Desktop'))
 	editor.Commands.add('set-device-tablet', (e) => e.setDevice('Tablet'))
-	editor.Commands.add('set-device-mobile', (e) => e.setDevice('Mobile portrait'))
+	editor.Commands.add('set-device-mobile', (e) => e.setDevice('Mobile'))
 
 	const panelName = 'commands'
 	const commandsPanel = editor.Panels.getPanel(panelName)

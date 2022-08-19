@@ -1,4 +1,5 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
+import { v4 as uuid } from 'uuid'
 
 import { Editor, EditorData } from '.'
 
@@ -10,15 +11,14 @@ interface EditorContentRenderProps {
 export function EditorContentRender({ data, loadingFallback }: EditorContentRenderProps) {
 	const [html, setHtml] = useState('')
 	const [editor, setEditor] = useState<any>()
+	const uidRef = useRef(uuid())
 
 	useEffect(() => {
 		const handle = async () => {
-			const juice = (await import('juice')).default
 			const htmlStr = editor.getHtml()
 			const cssStr = editor.getCss()
-			const inlineHTML = juice(`<style>${cssStr}</style>${htmlStr}`)
 
-			setHtml(inlineHTML)
+			setHtml(`<style id="${uidRef.current}">${cssStr}</style>${htmlStr}`)
 		}
 
 		editor && handle()

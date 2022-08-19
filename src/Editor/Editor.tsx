@@ -1,6 +1,5 @@
 import { HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
 import isEqual from 'lodash/isEqual'
-import GrapeJSType from 'grapesjs'
 
 import EditorStyle, { canvasCss } from './EditorStyle'
 import { loadPanels } from './panels'
@@ -35,12 +34,13 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 		const GrapeJS: any = await import('grapesjs')
 
 		setEditorInstance(
-			GrapeJSType.init({
+			GrapeJS.init({
 				container: editorContainerRef.current ?? undefined,
 				width: '100%',
 				height: '100%',
 				showDevices: false,
 				traitsEditor: true,
+				mediaCondition: 'min-width',
 				selectorManager: {
 					// This is not documented in GrapesJS, but it can replace a selector rule,
 					// we add this allows of width rules from tailwind. Add more rules here.
@@ -54,22 +54,22 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 				deviceManager: {
 					devices: [
 						{
-							id: 'mobilePortrait',
-							name: 'Mobile portrait',
-							width: '320px',
-							widthMedia: '767px',
+							id: 'mobile',
+							name: 'Mobile',
+							width: '375',
+							widthMedia: '',
+							height: '667',
 						},
 						{
 							id: 'tablet',
 							name: 'Tablet',
-							width: '900px',
-							widthMedia: '768px',
+							width: '768',
 						},
 						{
 							id: 'desktop',
 							name: 'Desktop',
-							width: '100%',
-							widthMedia: '1280px',
+							width: '',
+							widthMedia: '1280',
 						},
 					],
 				},

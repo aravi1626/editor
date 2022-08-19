@@ -1,6 +1,6 @@
 {
   "name": "editor",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Editor html content.",
   "main": "src/Editor/index.ts",
   "repository": "git@github.com:Exclusible/editor.git",
@@ -11,7 +11,7 @@
     "build:tailwind-css-editor": "node scripts/build-css.js"
   },
   "dependencies": {
-    "grapesjs": "git+ssh://git@github.com:iagormoraes/grapesjs.git#0.19.7",
+    "grapesjs": "git+https://github.com/iagormoraes/grapesjs.git#0.19.7",
     "lodash": "^4.17.21",
     "react": "18.1.0",
     "react-dom": "18.1.0",

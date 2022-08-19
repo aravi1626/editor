@@ -1525,9 +1525,9 @@ globby@^11.1.0:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-"grapesjs@git+ssh://git@github.com:iagormoraes/grapesjs.git#0.19.7":
+"grapesjs@git+https://github.com/iagormoraes/grapesjs.git#0.19.7":
   version "0.19.7"
-  resolved "git+ssh://git@github.com:iagormoraes/grapesjs.git#ec9e196105deaf8159d7fd8e96582ffdbdcbcb3c"
+  resolved "git+https://github.com/iagormoraes/grapesjs.git#ec9e196105deaf8159d7fd8e96582ffdbdcbcb3c"
   dependencies:
     backbone "1.4.1"
     backbone-undo "^0.2.5"

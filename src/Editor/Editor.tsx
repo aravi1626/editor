@@ -32,59 +32,59 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 		await import('grapesjs/dist/css/grapes.min.css')
 		const { styles } = await import('./styles/styles')
 		const GrapeJS: any = await import('grapesjs')
-
-		setEditorInstance(
-			GrapeJS.init({
-				container: editorContainerRef.current ?? undefined,
-				width: '100%',
-				height: '100%',
-				showDevices: false,
-				traitsEditor: true,
-				mediaCondition: 'min-width',
-				selectorManager: {
-					// This is not documented in GrapesJS, but it can replace a selector rule,
-					// we add this allows of width rules from tailwind. Add more rules here.
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					// @ts-ignore
-					escapeName: (name: string): string => name.trim().replace(/w-\d{1,2}(-)\d{1,2}/gi, '/'),
-					// This option will avoid to inject into classes selectors the inline styles ones.
-					componentFirst: true,
-				},
-				storageManager: false,
-				deviceManager: {
-					devices: [
-						{
-							id: 'mobile',
-							name: 'Mobile',
-							width: '375',
-							widthMedia: '',
-							height: '667',
-						},
-						{
-							id: 'tablet',
-							name: 'Tablet',
-							width: '768',
-						},
-						{
-							id: 'desktop',
-							name: 'Desktop',
-							width: '',
-							widthMedia: '1280',
-						},
-					],
-				},
-				canvasCss: canvasCss,
-				forceClass: false,
-				baseCss: styles,
-				protectedCss:
-					'body{background-color:white;padding:0;margin:0;}body *{box-sizing: border-box;}.cell {min-height: 30px;}',
-				exportWrapper: false,
-				wrapperIsBody: false,
-				showOffsets: true,
-				jsInHtml: true,
-				headless: headless,
-			})
-		)
+		const editor = GrapeJS.init({
+			container: editorContainerRef.current ?? undefined,
+			width: '100%',
+			height: '100%',
+			showDevices: false,
+			traitsEditor: true,
+			mediaCondition: 'min-width',
+			selectorManager: {
+				// This is not documented in GrapesJS, but it can replace a selector rule,
+				// we add this allows of width rules from tailwind. Add more rules here.
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				escapeName: (name: string): string => name.trim().replace(/w-\d{1,2}(-)\d{1,2}/gi, '/'),
+				// This option will avoid to inject into classes selectors the inline styles ones.
+				componentFirst: true,
+			},
+			storageManager: false,
+			deviceManager: {
+				devices: [
+					{
+						id: 'mobile',
+						name: 'Mobile',
+						width: '375',
+						widthMedia: '',
+						height: '667',
+					},
+					{
+						id: 'tablet',
+						name: 'Tablet',
+						width: '768',
+					},
+					{
+						id: 'desktop',
+						name: 'Desktop',
+						width: '',
+						widthMedia: '1280',
+						default: true,
+					},
+				],
+			},
+			canvasCss: canvasCss,
+			forceClass: false,
+			baseCss: styles,
+			protectedCss:
+				'body{background-color:white;padding:0;margin:0;}body *{box-sizing: border-box;}.cell {min-height: 30px;}',
+			exportWrapper: false,
+			wrapperIsBody: false,
+			showOffsets: true,
+			jsInHtml: true,
+			headless: headless,
+		})
+		editor.setDevice('Desktop')
+		setEditorInstance(editor)
 	}, [headless])
 
 	const getDataFromEditor = useCallback((editor: any) => {

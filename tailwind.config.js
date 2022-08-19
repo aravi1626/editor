@@ -34,10 +34,13 @@ module.exports = {
 		{ pattern: /^(m|mt|mb|ml|mr|mx|my)-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/, variants: safelistVariants },
 		// text-colors
 		{ pattern: /text-(primary|secondary)/ },
+		// text-align
+		{ pattern: /text-(left|center|right|justify)/ },
 		// text-sizes
 		{ pattern: /text-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/, variants: safelistVariants },
 		// font-family
 		{ pattern: /font-(primary|secondary)/ },
+
 		// font-weight
 		{ pattern: /font-(thin|light|normal|medium|semibold|bold)/ },
 		// bg colors

@@ -11,7 +11,7 @@ export function buildVideoBlock(editor: any, category: string) {
 				this.addMutedTrait()
 			},
 			addMutedTrait() {
-				const videoComponent: any = this
+				const videoComponent: any = this as any
 
 				if (videoComponent.getTrait('muted')) return
 

@@ -1,6 +1,6 @@
 {
   "name": "editor",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Editor html content.",
   "main": "src/Editor/index.ts",
   "repository": "git@github.com:Exclusible/editor.git",
@@ -8,7 +8,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build:tailwind-css-editor": "node scripts/build-css.js"
+    "build:tailwind-css-editor": "node scripts/build-css.js",
+    "lint": "eslint src/Editor"
   },
   "dependencies": {
     "grapesjs": "git+https://github.com/iagormoraes/grapesjs.git#0.19.8",

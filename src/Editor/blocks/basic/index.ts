@@ -124,7 +124,7 @@ export function buildBasicBlocks(editor: any) {
 		},
 	]
 
-	blocks.forEach(({ id, ...block }) =>
+	blocks.forEach(({ id, ...block }: any) =>
 		basicBlocksManager.add(id, {
 			label: block.label,
 			attributes: { muted: true, class: block.class ?? [] },

@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "vite",
     "build:tailwind-css-editor": "node scripts/build-css.js",
-    "lint": "eslint src/Editor"
+    "lint": "eslint src/Editor",
+    "prettier": "prettier --write ./src",
+    "prepare": "husky install"
   },
   "dependencies": {
     "grapesjs": "git+https://github.com/iagormoraes/grapesjs.git#0.19.8",
@@ -30,6 +32,8 @@
     "eslint-config-next": "12.2.2",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "postcss": "^8.4.14",
     "prettier": "^2.6.2",
     "tailwindcss": "^3.1.6",

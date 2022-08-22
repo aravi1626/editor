@@ -123,7 +123,7 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 	useEffect(() => {
 		if (!editorInstance) return
 
-		const handleChangesCount = (editor) => {
+		const handleChangesCount = (editor: any) => {
 			const newData = getDataFromEditor(editor)
 
 			oldDataRef.current = newData

@@ -1,6 +1,6 @@
 {
   "name": "editor",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Editor html content.",
   "main": "src/Editor/index.ts",
   "repository": "git@github.com:Exclusible/editor.git",
@@ -10,8 +10,7 @@
     "dev": "vite",
     "build:tailwind-css-editor": "node scripts/build-css.js",
     "lint": "eslint .",
-    "prettier": "prettier --write ./src",
-    "prepare": "husky install"
+    "prettier": "prettier --write ./src"
   },
   "dependencies": {
     "grapesjs": "git+https://github.com/iagormoraes/grapesjs.git#0.19.8",

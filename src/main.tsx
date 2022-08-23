@@ -14,7 +14,16 @@ const App: React.FC = () => {
 			<button className={buttonClassName} onClick={() => setPreview(true)}>
 				press to preview
 			</button>
-			<Editor className="flex-1" data={data} onSave={setData} onChangeValue={setData} />
+			<Editor
+				className="flex-1"
+				data={data}
+				onSave={({ state }) => setData(state)}
+				onChangeValue={({ state, html }) => {
+					setData(state)
+					// eslint-disable-next-line no-console
+					console.log(html)
+				}}
+			/>
 			{preview && (
 				<div
 					className="fixed inset-0 w-full h-full z-10 bg-white/80 overflow-auto"

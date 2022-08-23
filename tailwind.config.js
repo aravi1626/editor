@@ -11,11 +11,14 @@ module.exports = {
 	mode: 'jit',
 	content: ['./src/**/*.{js,ts,jsx,tsx}'],
 	safelist: [
-		// widths
+		// width
 		{ pattern: /w-full/, variants: safelistVariants },
+		{ pattern: /w-auto/, variants: safelistVariants },
 		{ pattern: /w-\d{1,2}\/12/, variants: safelistVariants },
 		// width/height
 		{ pattern: /max-?([wh])-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/, variants: safelistVariants },
+		// height
+		{ pattern: /h-auto/, variants: safelistVariants },
 		// flex
 		'flex',
 		{ pattern: /flex-(col|row)/, variants: safelistVariants },
@@ -57,6 +60,8 @@ module.exports = {
 		{ pattern: /(top|bottom|left|right)-px-(2|4|8|10|12|14|16|18|20|24|28|32|46|64|100)/ },
 		// aspect ratio
 		{ pattern: /aspect-(square|video)/, variants: safelistVariants },
+		// object fit
+		{ pattern: /object-(contain|fit|cover)/, variants: safelistVariants },
 	],
 	theme: {
 		container: {

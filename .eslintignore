@@ -3,3 +3,7 @@ node_modules
 .gitignore
 .eslintignore
 .env.*
+lint-staged.config.js
+postcss.config.js
+tailwind.config.js
+scripts/

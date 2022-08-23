@@ -6,13 +6,14 @@ import { loadPanels } from './panels'
 import { loadBlocks } from './blocks'
 
 export type EditorData = { components: object[] | any | string; styles: string }
+export type EditorStateWithHtml = { state: EditorData; html: string }
 
 export interface EditorProps extends HTMLAttributes<HTMLDivElement> {
 	data?: EditorData
 	headless?: boolean
 	onEditorLoad?(editorInstance: any): void
-	onChangeValue?(data: EditorData): void
-	onSave?(data: EditorData): void
+	onChangeValue?(data: EditorStateWithHtml): void
+	onSave?(data: EditorStateWithHtml): void
 }
 
 export function Editor(props: EditorProps) {
@@ -38,7 +39,6 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 			height: '100%',
 			showDevices: false,
 			traitsEditor: true,
-			mediaCondition: 'min-width',
 			selectorManager: {
 				// This is not documented in GrapesJS, but it can replace a selector rule,
 				// we add this allows of width rules from tailwind. Add more rules here.
@@ -55,7 +55,7 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 						id: 'mobile',
 						name: 'Mobile',
 						width: '375',
-						widthMedia: '',
+						widthMedia: '767.99',
 						height: '667',
 					},
 					{
@@ -67,8 +67,7 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 						id: 'desktop',
 						name: 'Desktop',
 						width: '',
-						widthMedia: '1280',
-						default: true,
+						widthMedia: '',
 					},
 				],
 			},
@@ -83,14 +82,15 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 			jsInHtml: true,
 			headless: headless,
 		})
-		editor.setDevice('Desktop')
 		setEditorInstance(editor)
 	}, [headless])
 
-	const getDataFromEditor = useCallback((editor: any) => {
+	const getDataFromEditor = useCallback((editor: any): EditorStateWithHtml => {
 		const components = JSON.stringify(editor.getComponents())
+		const htmlStr = editor.getHtml()
 		const styles = editor.getCss()
-		return { components, styles }
+
+		return { state: { components, styles }, html: `<style>${styles}</style>${htmlStr}` }
 	}, [])
 
 	// Effect to load editor assets.
@@ -126,7 +126,7 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 		const handleChangesCount = (editor: any) => {
 			const newData = getDataFromEditor(editor)
 
-			oldDataRef.current = newData
+			oldDataRef.current = newData.state
 
 			onChangeValue?.(newData)
 		}

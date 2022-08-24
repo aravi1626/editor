@@ -1,6 +1,6 @@
 {
   "name": "editor",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Editor html content.",
   "main": "src/Editor/index.ts",
   "repository": "git@github.com:Exclusible/editor.git",
@@ -13,6 +13,7 @@
     "prettier": "prettier --write ./src"
   },
   "dependencies": {
+    "aws-sdk": "^2.1201.0",
     "grapesjs": "git+https://github.com/iagormoraes/grapesjs.git#0.19.8",
     "lodash": "^4.17.21",
     "react": "18.1.0",

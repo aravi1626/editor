@@ -1,4 +1,4 @@
-import { HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
+import { HTMLAttributes, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import isEqual from 'lodash/isEqual'
 
 import EditorStyle, { canvasCss } from './EditorStyle'
@@ -14,13 +14,22 @@ export interface EditorProps extends HTMLAttributes<HTMLDivElement> {
 	onEditorLoad?(editorInstance: any): void
 	onChangeValue?(data: EditorStateWithHtml): void
 	onSave?(data: EditorStateWithHtml): void
+	renderCustomAssetManager?(editorInstance: any): ReactNode
 }
 
 export function Editor(props: EditorProps) {
 	return <EditorComponent {...props} />
 }
 
-function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, ...props }: EditorProps) {
+function EditorComponent({
+	data,
+	headless,
+	onEditorLoad,
+	onChangeValue,
+	onSave,
+	renderCustomAssetManager,
+	...props
+}: EditorProps) {
 	const editorContainerRef = useRef<HTMLDivElement | null>(null)
 	const oldDataRef = useRef<EditorData>()
 
@@ -70,6 +79,9 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 						widthMedia: '',
 					},
 				],
+			},
+			assetManager: {
+				custom: !!renderCustomAssetManager,
 			},
 			canvasCss: canvasCss,
 			forceClass: false,
@@ -162,6 +174,9 @@ function EditorComponent({ data, headless, onEditorLoad, onChangeValue, onSave, 
 		<div {...props}>
 			<EditorStyle />
 			<div ref={editorContainerRef} />
+			<div style={{ display: 'none' }}>
+				{!headless && renderCustomAssetManager && renderCustomAssetManager(editorInstance)}
+			</div>
 		</div>
 	)
 }

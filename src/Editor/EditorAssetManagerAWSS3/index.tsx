@@ -100,7 +100,10 @@ export function EditorAssetManagerAWSS3({ editor, s3Options }: Props) {
 				<UploadFileInput onChange={uploadFiles} />
 				<div className={styles.assets_container}>
 					{assets.map((asset) => (
-						<div key={asset.Key} className={styles.asset} onClick={() => propsRef.current.select(asset, false)}>
+						<div
+							key={asset.Key}
+							className={styles.asset}
+							onClick={() => propsRef.current.select(formatAssetUrl(asset), false)}>
 							<img src={formatAssetUrl(asset)} alt="" />
 							<div className={styles.info}>{asset.Key}</div>
 							<div

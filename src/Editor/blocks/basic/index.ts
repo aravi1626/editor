@@ -123,7 +123,7 @@ export function buildBasicBlocks(editor: any) {
 			content: block.content,
 			category: {
 				label: block.category,
-				open: true,
+				open: false,
 			},
 			media: block.media,
 		})

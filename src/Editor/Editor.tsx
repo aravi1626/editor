@@ -131,6 +131,26 @@ function EditorComponent({
 		onEditorLoad?.(editorInstance)
 	}, [editorInstance, onEditorLoad])
 
+	// Inject app theme's font families inside iframe editor.
+	useEffect(() => {
+		if (!editorInstance) return
+
+		const editorFrameHead = editorInstance.Canvas?.getFrameEl?.()?.contentWindow?.document?.head
+		const links = [
+			'https://fonts.googleapis.com/css2?family=Abel&display=swap',
+			'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap',
+		]
+
+		editorFrameHead &&
+			links.forEach((link) => {
+				const linkEl = document.createElement('link')
+
+				linkEl.rel = 'stylesheet'
+				linkEl.href = link
+				editorInstance.Canvas.getFrameEl().contentWindow?.document.head.appendChild(linkEl)
+			})
+	}, [editorInstance])
+
 	// Effect to listen to editor changes.
 	useEffect(() => {
 		if (!editorInstance) return

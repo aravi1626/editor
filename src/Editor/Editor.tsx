@@ -109,6 +109,14 @@ function EditorComponent({
 	useEffect(() => {
 		if (!editorInstance) return
 
+		// Allow pasting only plain texts, remove styles.
+		const iframeBody = editorInstance.Canvas.getBody();
+		iframeBody.addEventListener("paste", function(e) {
+			e.preventDefault();
+			const text = e.clipboardData.getData('text');
+			e.target.ownerDocument.execCommand("insertText", false, text);
+		});
+
 		// Add build editor artifacts here
 		loadPanels(editorInstance)
 		loadBlocks(editorInstance)

@@ -7,6 +7,7 @@ export function buildVideoBlock(editor: any, category: string) {
 			init() {
 				;(this as any).listenTo((this as any).model, 'active', this.openAssetManager)
 
+				// O setTimeout é usado aqui para deixar o vídeo muted, pois sem , o objeto vem como undefined pois ainda não foi montado o componente
 				setTimeout(() => {
 					;(this as any).videoEl.muted = true
 				}, 1000)

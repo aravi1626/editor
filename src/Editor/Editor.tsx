@@ -81,6 +81,7 @@ function EditorComponent({
 				],
 			},
 			assetManager: {
+				modalTitle: 'Select File',
 				custom: !!renderCustomAssetManager,
 			},
 			canvasCss: canvasCss,

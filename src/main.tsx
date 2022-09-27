@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import './style.css'
 
-import { Editor, EditorContentRender, EditorData } from './Editor'
+import { Editor, EditorAssetManagerAWSS3, EditorContentRender, EditorData } from './Editor'
 
 const App: React.FC = () => {
 	const [data, setData] = useState<EditorData | undefined>()
@@ -18,11 +18,21 @@ const App: React.FC = () => {
 				className="flex-1"
 				data={data}
 				onSave={({ state }) => setData(state)}
-				onChangeValue={({ state, html }) => {
+				onChangeValue={({ state }) => {
 					setData(state)
 					// eslint-disable-next-line no-console
-					console.log(html)
 				}}
+				renderCustomAssetManager={(editor) => (
+					<EditorAssetManagerAWSS3
+						editor={editor}
+						s3Options={{
+							bucket: 'dev-exclusible-com',
+							region: 'eu-west-1',
+							accessKeyId: 'AKIAVSEBRB7OU7IVUU7T',
+							secretAccessKey: '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',
+						}}
+					/>
+				)}
 			/>
 			{preview && (
 				<div

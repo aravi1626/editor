@@ -2,10 +2,11 @@ import { useRef } from 'react'
 import styles from './styles.module.css'
 
 type Props = {
+	typeAccept: 'image/*' | 'video/*'
 	onChange(files: FileList): void
 }
 
-export function UploadFileInput({ onChange }: Props) {
+export function UploadFileInput({ onChange, typeAccept }: Props) {
 	const dropZoneElementRef = useRef<HTMLDivElement | null>(null)
 	const inputRef = useRef<HTMLInputElement | null>(null)
 
@@ -29,7 +30,7 @@ export function UploadFileInput({ onChange }: Props) {
 			<input
 				ref={inputRef}
 				type="file"
-				accept="image/*"
+				accept={typeAccept}
 				name="myFile"
 				className={styles['drop-zone__input']}
 				onChange={(e) => {

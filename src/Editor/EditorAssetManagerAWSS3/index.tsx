@@ -31,15 +31,15 @@ export function EditorAssetManagerAWSS3({ editor, s3Options }: Props) {
 
 		const AWS = await import('aws-sdk')
 		const s3 = new AWS.S3(s3Options)
-		const params = { Bucket: s3Options.bucket }
+		const params = { Bucket: s3Options.bucket, Delimiter: '/', Prefix: 'uploads/' }
 
 		// create const to handle image and video format
 
 		const imageType = acceptFile === 'image/*' ? /.(png|jpeg|jpg|webp|svg|gif)/gim : /(mp4|webm)/gim
 
-		s3.listObjects(params, (err, data) =>
+		s3.listObjects(params, (err, data) => {
 			setAssets(data.Contents?.filter((content) => imageType.test(content.Key ?? '')) as Record<string, any>[])
-		)
+		})
 	}
 
 	const uploadFiles = async (files: FileList) => {
@@ -59,7 +59,7 @@ export function EditorAssetManagerAWSS3({ editor, s3Options }: Props) {
 			}
 			s3.upload(params)
 				.promise()
-				.then(fetchAssets as any)
+				.then(() => fetchAssets(typeAccept))
 		})
 	}
 
@@ -79,7 +79,7 @@ export function EditorAssetManagerAWSS3({ editor, s3Options }: Props) {
 
 		s3.deleteObject(params)
 			.promise()
-			.then(fetchAssets as any)
+			.then(() => fetchAssets(typeAccept))
 	}
 
 	useEffect(() => {

@@ -107,7 +107,7 @@ module.exports = {
 			laptop: '1024px',
 			desktop: '1280px',
 			wide: '1536px',
-			midwide: '1860px',
+			midwide: '1800px',
 			ultrawide: '2048px',
 		},
 		letterSpacing: {

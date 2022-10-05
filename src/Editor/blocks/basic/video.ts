@@ -64,10 +64,11 @@ export function buildVideoBlock(editor: any, category: string) {
 		activate: true,
 		content: {
 			type: 'video',
-			src: '',
+			src: 'https://dev-exclusible-com.s3.amazonaws.com/uploads/mov_bbb.mp4',
 			autoplay: true,
 			loop: true,
 			muted: true,
+			controls: false,
 			classes: ['w-full', 'aspect-video'],
 		},
 	}

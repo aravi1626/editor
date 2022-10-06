@@ -46,10 +46,32 @@
 	position: absolute;
 	top: 15px;
 	right: 15px;
-	background: url('/icon/close.png') no-repeat;
-	background-size: cover;
 	height: 20px;
 	width: 20px;
+	border-radius: 100%;
+	background-color: #e04f5f;
+}
+
+.close::after {
+	content: '';
+	position: absolute;
+	top: 19%;
+	left: 45%;
+	width: 2px;
+	background-color: #fff;
+	height: 12px;
+	transform: rotate(45deg);
+}
+
+.close::before {
+	content: '';
+	position: absolute;
+	top: 19%;
+	left: 45%;
+	width: 2px;
+	background-color: #fff;
+	height: 12px;
+	transform: rotate(-45deg);
 }
 
 .close:hover {

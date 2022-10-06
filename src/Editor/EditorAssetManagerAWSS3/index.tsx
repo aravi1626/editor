@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import { v4 as uuid } from 'uuid'
+import Spinner from './components/Loading'
 import styles from './styles.module.css'
 
 import { UploadFileInput } from './UploadFileInput'
@@ -58,7 +60,7 @@ export function EditorAssetManagerAWSS3({ editor, s3Options }: Props) {
 		Array.from(files).map(async (file) => {
 			const params = {
 				Bucket: s3Options.bucket,
-				Key: `uploads/${file.name}`,
+				Key: `uploads/${file.name}-${uuid()}`,
 				Body: file,
 			}
 			s3.upload(params)
@@ -124,10 +126,7 @@ export function EditorAssetManagerAWSS3({ editor, s3Options }: Props) {
 					<>
 						{loading ? (
 							<div className="flex items-center justify-center w-full h-full">
-								<div
-									style={{ borderColor: 'black', borderTopColor: 'transparent' }}
-									className="w-20 h-20 border-8 border-solid rounded-full animate-spin"
-								/>
+								<Spinner />
 							</div>
 						) : (
 							<>

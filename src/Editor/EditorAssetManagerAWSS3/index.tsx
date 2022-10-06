@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { v4 as uuid } from 'uuid'
-import Spinner from './components/Loading'
+import { Spinner } from './components'
 import styles from './styles.module.css'
 
 import { UploadFileInput } from './UploadFileInput'

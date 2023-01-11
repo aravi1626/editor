@@ -1,13 +1,13 @@
 export function buildComponentBlock(editor: any, category: string, Component: any) {
-	const componentType = Component.name
 	const componentEditorProps = {
+		name: Component?.editor.name ?? 'unknown',
 		classes: Component?.editor?.classes ?? [],
 		style: Component?.editor?.style ?? {},
 		attributes: Component?.editor?.attributes ?? {},
 		traits: Component?.editor?.traits ?? [],
 	}
 
-	editor.Components.addType(componentType, {
+	editor.Components.addType(componentEditorProps.name, {
 		extend: 'react-component',
 		model: {
 			defaults: {
@@ -21,14 +21,14 @@ export function buildComponentBlock(editor: any, category: string, Component: an
 				traits: componentEditorProps.traits,
 			},
 		},
-		isComponent: (el) => el.tagName === componentType.toUpperCase(),
+		isComponent: (el) => el.tagName === componentEditorProps.name.toUpperCase(),
 	})
 
-	editor.BlockManager.add(componentType, {
-		label: `<div class='gjs-fonts gjs-f-b1'>${componentType}</div>`,
+	editor.BlockManager.add(componentEditorProps.name, {
+		label: `<div class='gjs-fonts gjs-f-b1'>${componentEditorProps.name}</div>`,
 		category: category,
 		content: {
-			type: componentType,
+			type: componentEditorProps.name,
 			classes: componentEditorProps.classes,
 			style: componentEditorProps.style,
 		},

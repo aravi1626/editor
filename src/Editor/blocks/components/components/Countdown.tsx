@@ -101,6 +101,7 @@ export function Countdown(props) {
 }
 
 Countdown.editor = {
+	name: 'Countdown',
 	classes: ['text-px-32', 'inline-flex', 'font-primary', 'font-normal'],
 	style: {
 		'background-color': '#ccc',

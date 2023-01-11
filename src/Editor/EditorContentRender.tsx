@@ -6,6 +6,12 @@ import { Editor, EditorData } from '.'
 
 import * as CustomBlockComponents from './blocks/components/components'
 
+// Map block components to a named structure to keep names after bundle.
+const blockComponents = Object.keys(CustomBlockComponents).reduce(
+	(acc, key) => ({ ...acc, [CustomBlockComponents[key].editor.name]: CustomBlockComponents[key] }),
+	{}
+)
+
 interface EditorContentRenderProps {
 	data?: EditorData
 	loadingFallback?: ReactNode
@@ -61,7 +67,7 @@ export function EditorContentRender({ data, loadingFallback }: EditorContentRend
 						autoCloseVoidElements
 						componentsOnly={false}
 						jsx={editorContent?.html.replace(/class=/g, 'className=')}
-						components={CustomBlockComponents as any}
+						components={blockComponents as any}
 					/>
 				</div>
 			)}

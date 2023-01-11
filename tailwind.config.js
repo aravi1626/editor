@@ -21,7 +21,7 @@ module.exports = {
 		{ pattern: /h-auto/, variants: safelistVariants },
 		// flex
 		'flex',
-		{ pattern: /flex-(col|row)/, variants: safelistVariants },
+		{ pattern: /(inline)?flex(-col|-row)?/, variants: safelistVariants },
 		{ pattern: /items-(start|center|end|stretch)/, variants: safelistVariants },
 		{ pattern: /justify-(start|center|end|around|between|evenly)/, variants: safelistVariants },
 		{ pattern: /justify-items-(start|center|end|stretch)/, variants: safelistVariants },

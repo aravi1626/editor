@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import isEqual from 'lodash/isEqual'
 
-import EditorStyle, { canvasCss } from './EditorStyle'
+import EditorStyle, { canvasCss, protectedCss } from './EditorStyle'
 import { loadPanels } from './panels'
 import { loadBlocks } from './blocks'
 
@@ -11,6 +11,7 @@ export type EditorStateWithHtml = { state: EditorData; html: string }
 export interface EditorProps extends HTMLAttributes<HTMLDivElement> {
 	data?: EditorData
 	headless?: boolean
+	preview?: boolean
 	onEditorLoad?(editorInstance: any): void
 	onChangeValue?(data: EditorStateWithHtml): void
 	onSave?(data: EditorStateWithHtml): void
@@ -24,6 +25,7 @@ export function Editor(props: EditorProps) {
 function EditorComponent({
 	data,
 	headless,
+	preview,
 	onEditorLoad,
 	onChangeValue,
 	onSave,
@@ -87,8 +89,7 @@ function EditorComponent({
 			canvasCss: canvasCss,
 			forceClass: false,
 			baseCss: styles,
-			protectedCss:
-				'body{background-color:white;padding:0;margin:0;}body *{box-sizing: border-box;}.cell {min-height: 30px;}',
+			protectedCss: protectedCss,
 			exportWrapper: false,
 			wrapperIsBody: false,
 			showOffsets: true,
@@ -124,10 +125,14 @@ function EditorComponent({
 		loadPanels(editorInstance)
 		loadBlocks(editorInstance)
 
+		if (preview) {
+			editorInstance.runCommand('core:preview')
+		}
+
 		return () => {
 			iframeBody?.removeEventListener('paste', handlePaste)
 		}
-	}, [editorInstance])
+	}, [editorInstance, preview])
 
 	// Effect to load editor data.
 	useEffect(() => {
@@ -205,13 +210,13 @@ function EditorComponent({
 		setIsMounted(true)
 	}, [])
 
+	const renderAssetManager = (!headless && renderCustomAssetManager && renderCustomAssetManager(editorInstance)) as any
+
 	return (
 		<div {...props}>
 			<EditorStyle />
 			<div ref={editorContainerRef} />
-			<div style={{ display: 'none' }}>
-				{!headless && renderCustomAssetManager && renderCustomAssetManager(editorInstance)}
-			</div>
+			<div style={{ display: 'none' }}>{renderAssetManager}</div>
 		</div>
 	)
 }

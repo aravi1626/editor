@@ -1,5 +1,8 @@
 export const canvasCss = `.gjs-selected,.gjs-hovered,.gjs-cv-canvas .gjs-highlighter {outline-color: black !important;}`
 
+export const protectedCss =
+	'body{background-color:white;padding:0;margin:0;}body *{box-sizing: border-box;}.cell {min-height: 30px;}blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {margin: 0;}h1, h2, h3, h4, h5, h6 {font-size: inherit;font-weight: inherit;}'
+
 export default function EditorStyle() {
 	return (
 		<style

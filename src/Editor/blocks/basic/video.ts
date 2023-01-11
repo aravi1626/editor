@@ -10,7 +10,8 @@ export function buildVideoBlock(editor: any, category: string) {
 				// The setTimeout is used here to activate the muted video, because without , the object comes as undefined because the component has not yet been mounted
 				setTimeout(() => {
 					;(this as any).videoEl.muted = true
-				}, 1000)
+					;(this as any).videoEl.setAttribute('playsinline', '')
+				}, 500)
 			},
 
 			events: {
@@ -36,6 +37,7 @@ export function buildVideoBlock(editor: any, category: string) {
 			updateTraits() {
 				this.addMutedTrait()
 			},
+
 			addMutedTrait() {
 				const videoComponent: any = this as any
 				if (videoComponent.getTrait('muted')) return
@@ -46,12 +48,15 @@ export function buildVideoBlock(editor: any, category: string) {
 					value: videoComponent.attributes.muted,
 				})
 			},
-			handleMutedPropChange() {
-				const isMuted = (this as any).view.opts.model.get('muted')
-				;(this as any).view.opts.model.set('muted', !isMuted)
+
+			handleMutedPropChange(_, val) {
+				;(this as any).view.opts.model.set('muted', val)
 
 				const element = (this as any).view.videoEl
-				element.muted = !isMuted
+
+				element.muted = val
+
+				val ? element.setAttribute('muted', '') : element.removeAttribute('muted')
 			},
 		},
 	})
@@ -64,11 +69,16 @@ export function buildVideoBlock(editor: any, category: string) {
 		activate: true,
 		content: {
 			type: 'video',
-			src: '',
+			src: 'https://dev-exclusible-com.s3.amazonaws.com/uploads/mov_bbb.mp4',
 			autoplay: true,
 			loop: true,
 			muted: true,
+			controls: false,
 			classes: ['w-full', 'aspect-video'],
+			attributes: {
+				playsinline: true,
+				muted: true,
+			},
 		},
 	}
 }

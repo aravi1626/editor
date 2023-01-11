@@ -210,13 +210,13 @@ function EditorComponent({
 		setIsMounted(true)
 	}, [])
 
+	const renderAssetManager = (!headless && renderCustomAssetManager && renderCustomAssetManager(editorInstance)) as any
+
 	return (
 		<div {...props}>
 			<EditorStyle />
 			<div ref={editorContainerRef} />
-			<div style={{ display: 'none' }}>
-				{!headless && renderCustomAssetManager && renderCustomAssetManager(editorInstance)}
-			</div>
+			<div style={{ display: 'none' }}>{renderAssetManager}</div>
 		</div>
 	)
 }

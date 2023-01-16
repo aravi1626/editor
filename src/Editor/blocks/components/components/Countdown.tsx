@@ -112,6 +112,7 @@ Countdown.editor = {
 		titleClass: '',
 		titleColor: '',
 		valueClass: '',
+		colorPicker: '',
 	},
 	traits: [
 		{
@@ -138,6 +139,11 @@ Countdown.editor = {
 			type: 'color',
 			label: 'Value Color',
 			name: 'valueColor',
+		},
+		{
+			type: 'custom-color',
+			label: 'Color Picker',
+			name: 'colorPicker',
 		},
 	],
 }

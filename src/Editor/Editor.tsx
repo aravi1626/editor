@@ -4,6 +4,7 @@ import isEqual from 'lodash/isEqual'
 import EditorStyle, { canvasCss, protectedCss } from './EditorStyle'
 import { loadPanels } from './panels'
 import { loadBlocks } from './blocks'
+import { loadTraits } from './traits'
 
 export type EditorData = { components: object[] | any | string; styles: string }
 export type EditorStateWithHtml = { state: EditorData; html: string }
@@ -122,6 +123,7 @@ function EditorComponent({
 		iframeBody?.addEventListener('paste', handlePaste)
 
 		// Add build editor artifacts here
+		loadTraits(editorInstance)
 		loadPanels(editorInstance)
 		loadBlocks(editorInstance)
 

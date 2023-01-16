@@ -126,7 +126,7 @@ Countdown.editor = {
 			name: 'titleClass',
 		},
 		{
-			type: 'color',
+			type: 'custom-color',
 			label: 'Title Color',
 			name: 'titleColor',
 		},
@@ -134,16 +134,6 @@ Countdown.editor = {
 			type: 'text',
 			label: 'Value Class selector',
 			name: 'valueClass',
-		},
-		{
-			type: 'color',
-			label: 'Value Color',
-			name: 'valueColor',
-		},
-		{
-			type: 'custom-color',
-			label: 'Color Picker',
-			name: 'colorPicker',
 		},
 	],
 }

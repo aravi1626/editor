@@ -18,7 +18,7 @@ const CustomColorPicker = ({ onChange }: any) => {
 	return (
 		<div className="flex" data-input>
 			<input value={state} onChange={handleChange} type="color" />
-			<input value={state} onChange={handleChange} type="text" />
+			<input className="bg-[#f1f1f1]" value={state} onChange={handleChange} type="text" />
 		</div>
 	)
 }
@@ -37,10 +37,10 @@ export function customColorPickerTrait(editor: any) {
 			this.colorInput = reactInput
 			return container
 		},
-		onEvent({ elInput, component, event }) {
-			// console.log('onEvent', elInput)
-			// const colorValue = elInput.querySelector('input[type=color]').value
-			// const textValue = elInput.querySelector('input[type=text]').value
+		onEvent({ elInput, component }) {
+			const colorValue = elInput.querySelector('input[type=color]').value
+
+			component.addAttributes({ titleColor: colorValue })
 		},
 	})
 }

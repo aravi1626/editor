@@ -1,5 +1,5 @@
-import { buildColorPickerTrait } from './buildColorPickerTrait'
+import { customColorPickerTrait } from './customColor'
 
-export function loadTraits(editor: any) {
-	buildColorPickerTrait(editor)
+export function loadCustomTraits(editor: any) {
+	customColorPickerTrait(editor)
 }

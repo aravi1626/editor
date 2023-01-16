@@ -23,7 +23,7 @@ const CustomColorPicker = ({ onChange }: any) => {
 	)
 }
 
-export function buildColorPickerTrait(editor: any) {
+export function customColorPickerTrait(editor: any) {
 	editor.TraitManager.addType('custom-color', {
 		templateInput: '',
 		// Expects as return a simple HTML string or an HTML element

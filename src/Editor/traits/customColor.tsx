@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
 
 const CustomColorPicker = ({ onChange }: any) => {
@@ -15,9 +15,19 @@ const CustomColorPicker = ({ onChange }: any) => {
 		onChange(e)
 	}
 
+	useEffect(() => {
+		console.log('ENTREI USEFFECT')
+		const interval = setInterval(() => console.log('INTERVAL'), 1000)
+
+		return () => {
+			console.log('ENTREI UNMOUNT')
+			clearInterval(interval)
+		}
+	}, [])
+
 	return (
 		<div className="flex" data-input>
-			<input value={state} onChange={handleChange} type="color" />
+			<input id="color" value={state} onChange={handleChange} type="color" />
 			<input className="bg-[#f1f1f1]" value={state} onChange={handleChange} type="text" />
 		</div>
 	)
@@ -28,19 +38,25 @@ export function customColorPickerTrait(editor: any) {
 		templateInput: '',
 		// Expects as return a simple HTML string or an HTML element
 		createInput({ trait, ...args }) {
-			const container = document.createElement('div')
-			const reactInput = React.cloneElement(<CustomColorPicker onChange={(e) => this.onChange(e)} />, { type: 'color' })
-			const root = ReactDOM.createRoot(container)
-			root.render(reactInput)
-			// console.log(container.getElementsByTagName('input'))
-			// Here we can decide to use properties from the trait
-			this.colorInput = reactInput
-			return container
+			return this.container
+		},
+		init() {
+			this.container = document.createElement('div')
 		},
 		onEvent({ elInput, component }) {
 			const colorValue = elInput.querySelector('input[type=color]').value
 
 			component.addAttributes({ titleColor: colorValue })
+		},
+		onRender() {
+			const reactInput = React.cloneElement(<CustomColorPicker onChange={(e) => this.onChange(e)} />, { type: 'color' })
+
+			if (this.root) {
+				this.root.unmount()
+			}
+			this.root = ReactDOM.createRoot(this.container)
+
+			this.root.render(reactInput)
 		},
 	})
 }

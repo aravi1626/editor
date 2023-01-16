@@ -1,5 +1,8 @@
-import { customColorPickerTrait } from './customColor'
+import * as Components from './components'
+import { buildComponentTrait } from './buildComponentTrait'
 
 export function loadCustomTraits(editor: any) {
-	customColorPickerTrait(editor)
+	for (const [_, component] of Object.entries(Components)) {
+		buildComponentTrait(editor, component)
+	}
 }

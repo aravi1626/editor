@@ -1,9 +1,8 @@
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 import JsxParser from 'react-jsx-parser'
 import { v4 as uuid } from 'uuid'
 
-import { Editor, EditorData } from '.'
-
+import { EditorStateWithDOMContent } from './types'
 import * as CustomBlockComponents from './blocks/components/components'
 
 // Map block components to a named structure to keep names after bundle.
@@ -13,64 +12,42 @@ const blockComponents = Object.keys(CustomBlockComponents).reduce(
 )
 
 interface EditorContentRenderProps {
-	data?: EditorData
+	data?: EditorStateWithDOMContent
 	loadingFallback?: ReactNode
 }
 
 export function EditorContentRender({ data, loadingFallback }: EditorContentRenderProps) {
 	const containerRef = useRef<HTMLDivElement | null>(null)
-	const [editor, setEditor] = useState<any>()
 	const uidRef = useRef('c' + uuid())
-	const [editorContent, setEditorContent] = useState<{ html: string; css: string; js: string } | null>(null)
 
 	useEffect(() => {
-		const handle = async () => {
-			const htmlStr = editor.getHtml()
-			const cssStr = editor.getCss()
-			const jsStr = editor.getJs()
+		if (!data) return
 
-			setEditorContent({
-				html: htmlStr,
-				css: cssStr,
-				js: jsStr,
-			})
-		}
-
-		editor && handle()
-	}, [editor, data])
-
-	useEffect(() => {
-		if (!editorContent) return
-
+		// Delete every style related to this container, so it can be regenerated
 		document.querySelectorAll(`#${uidRef.current}`).forEach((node) => containerRef.current?.removeChild(node))
 
 		const style = document.createElement('style')
 		style.id = uidRef.current
-		style.innerHTML = editorContent?.css
+		style.innerHTML = data?.css
 
 		containerRef.current?.prepend(style)
 
-		eval(editorContent.js)
-	}, [editorContent])
+		eval(data.js)
+	}, [data])
+
+	if (data === null) return <>{loadingFallback || null}</>
 
 	return (
-		<>
-			<Editor data={data} onEditorLoad={setEditor} headless />
-			{!editor ? (
-				loadingFallback
-			) : (
-				<div ref={containerRef}>
-					{/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-					{/*@ts-ignore*/}
-					<JsxParser
-						allowUnknownElements
-						autoCloseVoidElements
-						componentsOnly={false}
-						jsx={editorContent?.html.replace(/class=/g, 'className=')}
-						components={blockComponents as any}
-					/>
-				</div>
-			)}
-		</>
+		<div ref={containerRef}>
+			{/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+			{/*@ts-ignore*/}
+			<JsxParser
+				allowUnknownElements
+				autoCloseVoidElements
+				componentsOnly={false}
+				jsx={data?.html.replace(/class=/g, 'className=')}
+				components={blockComponents as any}
+			/>
+		</div>
 	)
 }

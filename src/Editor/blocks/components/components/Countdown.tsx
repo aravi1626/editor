@@ -15,8 +15,9 @@ const treatTimestamp = (timestamp: string | number) => {
 }
 
 // This method will convert the date into a format with timezone passed.
-const formatInTimeZone = (date, dateFormat, timeZone) =>
-	formatTZ(utcToZonedTime(date, timeZone), dateFormat, { timeZone })
+const formatInTimeZone = (date, dateFormat, timeZone) => {
+	return formatTZ(utcToZonedTime(date, timeZone), dateFormat, { timeZone })
+}
 
 function useCountdown(date) {
 	const dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
@@ -59,7 +60,7 @@ function useCountdown(date) {
 }
 
 export function Countdown(props) {
-	const { values } = useCountdown(props.date)
+	const { values } = useCountdown(new Date(props.date))
 	const fields = {
 		day: {
 			name: 'Days',
@@ -116,7 +117,7 @@ Countdown.editor = {
 	},
 	traits: [
 		{
-			type: 'date',
+			type: 'datetime-local',
 			label: 'Date',
 			name: 'date',
 		},

@@ -1,21 +1,19 @@
 import { HTMLAttributes, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import isEqual from 'lodash/isEqual'
 
+import { EditorDataState, EditorStateWithDOMContent } from './types'
 import EditorStyle, { canvasCss, protectedCss } from './EditorStyle'
 import { loadPanels } from './panels'
 import { loadBlocks } from './blocks'
 import { loadCustomTraits } from './traits'
 
-export type EditorData = { components: object[] | any | string; styles: string }
-export type EditorStateWithHtml = { state: EditorData; html: string }
-
 export interface EditorProps extends HTMLAttributes<HTMLDivElement> {
-	data?: EditorData
+	data?: EditorStateWithDOMContent
 	headless?: boolean
 	preview?: boolean
 	onEditorLoad?(editorInstance: any): void
-	onChangeValue?(data: EditorStateWithHtml): void
-	onSave?(data: EditorStateWithHtml): void
+	onChangeValue?(data: EditorStateWithDOMContent): void
+	onSave?(data: EditorStateWithDOMContent): void
 	renderCustomAssetManager?(editorInstance: any): ReactNode
 }
 
@@ -34,7 +32,7 @@ function EditorComponent({
 	...props
 }: EditorProps) {
 	const editorContainerRef = useRef<HTMLDivElement | null>(null)
-	const oldDataRef = useRef<EditorData>()
+	const oldDataStateRef = useRef<EditorDataState>()
 
 	const [editorInstance, setEditorInstance] = useState<any>()
 	const [isMounted, setIsMounted] = useState(false)
@@ -100,12 +98,13 @@ function EditorComponent({
 		setEditorInstance(editor)
 	}, [headless])
 
-	const getDataFromEditor = useCallback((editor: any): EditorStateWithHtml => {
+	const getDataFromEditor = useCallback((editor: any): EditorStateWithDOMContent => {
 		const components = JSON.stringify(editor.getComponents())
 		const htmlStr = editor.getHtml()
 		const styles = editor.getCss()
+		const js = editor.getJs()
 
-		return { state: { components, styles }, html: `<style>${styles}</style>${htmlStr}` }
+		return { state: { components, styles }, js, css: styles, html: htmlStr }
 	}, [])
 
 	// Effect to load editor assets.
@@ -140,9 +139,9 @@ function EditorComponent({
 	useEffect(() => {
 		if (!editorInstance) return
 
-		if (!isEqual(oldDataRef.current, data)) {
-			editorInstance.setComponents(data?.components && JSON.parse(data?.components))
-			editorInstance.setStyle(data?.styles)
+		if (!isEqual(oldDataStateRef.current, data?.state)) {
+			editorInstance.setComponents(data?.state?.components && JSON.parse(data?.state?.components))
+			editorInstance.setStyle(data?.state?.styles)
 		}
 	}, [editorInstance, data])
 
@@ -180,7 +179,7 @@ function EditorComponent({
 		const handleChangesCount = (editor: any) => {
 			const newData = getDataFromEditor(editor)
 
-			oldDataRef.current = newData.state
+			oldDataStateRef.current = newData.state
 
 			onChangeValue?.(newData)
 		}

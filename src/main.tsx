@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import './style.css'
 
-import { Editor, EditorAssetManagerAWSS3, EditorContentRender, EditorData } from './Editor'
+import { Editor, EditorAssetManagerAWSS3, EditorContentRender, EditorStateWithDOMContent } from './Editor'
 
 const App: React.FC = () => {
-	const [data, setData] = useState<EditorData | undefined>()
+	const [data, setData] = useState<EditorStateWithDOMContent | undefined>()
 	const [preview, setPreview] = useState(false)
 	const buttonClassName = 'bg-primary text-white border-none text-px-18 cursor-pointer px-px-12'
 
@@ -17,11 +17,8 @@ const App: React.FC = () => {
 			<Editor
 				className="flex-1"
 				data={data}
-				onSave={({ state }) => setData(state)}
-				onChangeValue={({ state }) => {
-					setData(state)
-					// eslint-disable-next-line no-console
-				}}
+				onSave={(state) => setData(state)}
+				onChangeValue={(state) => setData(state)}
 				renderCustomAssetManager={(editor) => (
 					<EditorAssetManagerAWSS3
 						editor={editor}

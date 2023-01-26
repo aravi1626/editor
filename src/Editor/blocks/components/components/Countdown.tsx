@@ -87,7 +87,7 @@ export function Countdown(props) {
 					const field = fields[key]
 					return (
 						<div key={key} className="flex flex-col gap-px-8 text-center">
-							<h3 className={props.titleClass} style={{ color: props.titleColor }} contentEditable>
+							<h3 className={props.titleClass} style={{ color: props.titleColor }}>
 								{field.name}
 							</h3>
 							<p className={props.valueClass} style={{ color: props.valueColor }}>

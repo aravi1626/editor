@@ -63,6 +63,8 @@ export function loadBaseReactComponentType(editor) {
 				this.renderChildren()
 				const reactEl = this.createReactEl(model.get('component'), {
 					...model.get('attributes'),
+					model: model,
+					isEditorMode: true,
 				})
 				this.mountReact(reactEl, el)
 				const child = el.querySelector(`span[${wrapChild}]`)

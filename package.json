@@ -1,6 +1,6 @@
 {
 	"name": "editor",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "Editor html content.",
 	"main": "src/Editor/index.ts",
 	"repository": "git@github.com:Exclusible/editor.git",

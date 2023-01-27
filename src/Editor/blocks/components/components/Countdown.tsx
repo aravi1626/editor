@@ -6,6 +6,17 @@ import differenceInDays from 'date-fns/differenceInDays'
 import formatTZ from 'date-fns-tz/format'
 import utcToZonedTime from 'date-fns-tz/utcToZonedTime'
 
+import { ComponentBlockProps } from '../types'
+import { useComponentModel } from '../../../helpers/hooks/useComponentModel'
+
+type CountdownProps = {
+	date: string
+	titleClass: string
+	titleColor: string
+	valueClass: string
+	valueColor: string
+}
+
 const treatTimestamp = (timestamp: string | number) => {
 	if (typeof timestamp === 'string') {
 		if (!/^\d+$/.test(timestamp)) return timestamp
@@ -59,22 +70,26 @@ function useCountdown(date) {
 	return { ended, values }
 }
 
-export function Countdown(props) {
+export function Countdown(props: ComponentBlockProps<CountdownProps>) {
 	const { values } = useCountdown(new Date(props.date))
 	const fields = {
 		day: {
+			key: 'dayText',
 			name: 'Days',
 			value: values.d,
 		},
 		hour: {
+			key: 'hourText',
 			name: 'Hours',
 			value: values.h,
 		},
 		minute: {
+			key: 'minuteText',
 			name: 'Minutes',
 			value: values.m,
 		},
 		second: {
+			key: 'secondText',
 			name: 'Seconds',
 			value: values.s,
 		},
@@ -85,11 +100,21 @@ export function Countdown(props) {
 			<div className="flex gap-px-12">
 				{Object.keys(fields).map((key) => {
 					const field = fields[key]
+					const { defaultValue, onInput } = useComponentModel({
+						key: field.key,
+						model: props.model,
+						defaultValue: props[field.key] ?? field.name,
+						isEditorMode: props.isEditorMode,
+					})
 					return (
 						<div key={key} className="flex flex-col gap-px-8 text-center">
-							<h3 className={props.titleClass} style={{ color: props.titleColor }}>
-								{field.name}
-							</h3>
+							<h3
+								className={props.titleClass}
+								style={{ color: props.titleColor }}
+								contentEditable={props.isEditorMode}
+								onInput={onInput()}
+								dangerouslySetInnerHTML={{ __html: defaultValue }}
+							/>
 							<p className={props.valueClass} style={{ color: props.valueColor }}>
 								{field.value}
 							</p>
@@ -140,6 +165,27 @@ Countdown.editor = {
 			type: 'text',
 			label: 'Value Class selector',
 			name: 'valueClass',
+		},
+		// Add these traits below in which will control the content of texts.
+		{
+			type: 'text',
+			label: 'Days Text',
+			name: 'dayText',
+		},
+		{
+			type: 'text',
+			label: 'Hours Text',
+			name: 'hourText',
+		},
+		{
+			type: 'text',
+			label: 'Minutes Text',
+			name: 'minuteText',
+		},
+		{
+			type: 'text',
+			label: 'Seconds Text',
+			name: 'secondText',
 		},
 	],
 }
